@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ricardo Ramos | Estética Avançada</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #A27658;
+            --secondary-color: #CFB79A;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --text-color: #333333;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            border: 2px solid var(--primary-color);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--primary-color);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            background-color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo img { height: 50px; }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+
+        .nav-links li a:hover { color: var(--primary-color); }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: url('https://convidatasshop.wordpress.com/wp-content/uploads/2026/01/img_4721.jpg?w=768') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            line-height: 1.4;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 10px auto 0;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .carousel {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .carousel-slide.active { opacity: 1; }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.7);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            z-index: 2;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .carousel-btn:hover { background: var(--white); }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        .service-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .service-info h3 { color: var(--primary-color); margin-bottom: 1rem; }
+        .service-info p { font-size: 0.9rem; color: #666; margin-bottom: 1.5rem; }
+
+        /* FAQ */
+        .faq-section { background-color: var(--light-bg); }
+
+        .accordion { max-width: 800px; margin: 0 auto; }
+
+        .accordion-item {
+            background: var(--white);
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .accordion-header:hover { background-color: rgba(162, 118, 88, 0.05); }
+
+        .accordion-icon { transition: transform 0.3s ease; }
+
+        .accordion-item.active .accordion-icon { transform: rotate(180deg); }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .accordion-body p {
+            padding-bottom: 1.5rem;
+            color: #666;
+        }
+
+        /* Location */
+        .location-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 300px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Contact */
+        .contact-section {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .contact-section .section-title { color: var(--white); }
+
+        .contact-section .section-title::after { background-color: var(--secondary-color); }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .contact-image img {
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            color: var(--text-color);
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        /* About */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            align-items: center;
+        }
+
+        .about-text { padding: 4rem; }
+        .about-text h3 { color: var(--primary-color); font-size: 2rem; margin-bottom: 1.5rem; }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--white);
+            padding: 3rem 5% 1rem;
+            text-align: center;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: var(--white);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                text-align: center;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+
+            .contact-container, .location-content, .about-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-image, .about-image { order: -1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://convidatasshop.wordpress.com/wp-content/uploads/2026/01/novo-projeto-5.png?w=1024" alt="Ricardo Ramos Logo">
+        </div>
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#servicos">Meus Serviços</a></li>
+            <li><a href="#sobre">Sobre Mim</a></li>
+            <li><a href="#duvidas">Dúvidas</a></li>
+            <li><a href="#contato" class="btn">Agendar Avaliação</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section id="inicio" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="https://convidatasshop.wordpress.com/wp-content/uploads/2026/01/novo-projeto-4.png?w=1024" alt="Ricardo Ramos" style="max-width: 300px; margin: 0 auto 2rem; display: block;">
+            <p class="hero-subtitle">"Seja muito bem-vindo. Aqui, realço o que você tem de melhor. Descubra o poder da estética avançada."</p>
+            <a href="#servicos" class="btn btn-outline">Conheça Meus Serviços</a>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="servicos" class="section">
+        <h2 class="section-title">Conheça Meus Serviços</h2>
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <div class="carousel">
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop" class="carousel-slide active" alt="Preenchimento Labial">
+                    <img src="https://images.unsplash.com/photo-1522337360705-8754d8722b39?q=80&w=2080&auto=format&fit=crop" class="carousel-slide" alt="Preenchimento Labial 2">
+                    <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="service-info">
+                    <h3>Preenchimento Labial</h3>
+                    <p>Realce o contorno e volume dos seus lábios com naturalidade e harmonia.</p>
+                    <a href="https://wa.me/5563999610812?text=Olá! Gostaria de saber mais sobre o Preenchimento Labial." class="btn" target="_blank">Saiba mais</a>
+                </div>
+            </div>
+
+            <!-- Os outros 4 serviços seguem o mesmo padrão... -->
+
+            <!-- Service 2 -->
+            <div class="service-card">
+                <div class="carousel">
+                    <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2070&auto=format&fit=crop" class="carousel-slide active" alt="Fios PDO">
+                    <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=2070&auto=format&fit=crop" class="carousel-slide" alt="Fios PDO 2">
+                    <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="service-info">
+                    <h3>Fios PDO</h3>
+                    <p>Estimule colágeno e promova lifting facial sem cirurgia.</p>
+                    <a href="https://wa.me/5563999610812?text=Olá! Gostaria de saber mais sobre os Fios PDO." class="btn" target="_blank">Saiba mais</a>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card">
+                <div class="carousel">
+                    <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?q=80&w=2070&auto=format&fit=crop" class="carousel-slide active" alt="Toxina Botulínica">
+                    <img src="https://images.unsplash.com/photo-1596704017382-30538638b44d?q=80&w=2069&auto=format&fit=crop" class="carousel-slide" alt="Toxina Botulínica 2">
+                    <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="service-info">
+                    <h3>Toxina Botulínica</h3>
+                    <p>Suavize linhas de expressão e previna o envelhecimento da pele.</p>
+                    <a href="https://wa.me/5563999610812?text=Olá! Gostaria de saber mais sobre a Toxina Botulínica." class="btn" target="_blank">Saiba mais</a>
+                </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="service-card">
+                <div class="carousel">
+                    <img src="https://images.unsplash.com/photo-1519415387722-a1c3bbef716c?q=80&w=2070&auto=format&fit=crop" class="carousel-slide active" alt="Harmonização Facial">
+                    <img src="https://images.unsplash.com/photo-1620331313174-8318a4740111?q=80&w=2069&auto=format&fit=crop" class="carousel-slide" alt="Harmonização Facial 2">
+                    <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="service-info">
+                    <h3>Harmonização Facial</h3>
+                    <p>Equilíbrio e simetria para realçar sua beleza natural.</p>
+                    <a href="https://wa.me/5563999610812?text=Olá! Gostaria de saber mais sobre a Harmonização Facial." class="btn" target="_blank">Saiba mais</a>
+                </div>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="service-card">
+                <div class="carousel">
+                    <img src="https://plus.unsplash.com/premium_photo-1661775756810-82dbd209fc95?q=80&w=2070&auto=format&fit=crop" class="carousel-slide active" alt="Endolifting">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2080&auto=format&fit=crop" class="carousel-slide" alt="Endolifting 2">
+                    <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="service-info">
+                    <h3>Endolifting</h3>
+                    <p>Tecnologia laser para rejuvenescimento e retração de pele.</p>
+                    <a href="https://wa.me/5563999610812?text=Olá! Gostaria de saber mais sobre o Endolifting." class="btn" target="_blank">Saiba mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="duvidas" class="section faq-section">
+        <h2 class="section-title">Dúvidas Frequentes</h2>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Quanto tempo dura o preenchimento?</span>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <p>A duração varia conforme o organismo e produto utilizado, geralmente entre 12 a 18 meses.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Os procedimentos são dolorosos?</span>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <p>Utilizamos anestésicos potentes para garantir o máximo conforto durante os procedimentos.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Qual o tempo de recuperação?</span>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <p>A maioria dos procedimentos permite retorno imediato às atividades, com pequenos cuidados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="section">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="https://convidatasshop.wordpress.com/wp-content/uploads/2026/01/img_4719.jpg?w=768" alt="Ricardo Ramos Profissional">
+            </div>
+            <div class="about-text">
+                <h3>Ricardo Ramos</h3>
+                <p>Especialista em estética avançada com foco em naturalidade e rejuvenescimento. Minha missão é elevar sua autoestima através de procedimentos seguros e personalizados, respeitando sempre a sua essência.</p>
+                <br>
+                <p>Com anos de experiência e constante atualização em técnicas internacionais, ofereço o que há de mais moderno em harmonização e tratamentos faciais.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Localização -->
+    <section class="section">
+        <h2 class="section-title">Conheça Nosso Espaço</h2>
+        <div class="location-content">
+            <div class="location-info">
+                <h3>Clínica Ricardo Ramos</h3>
+                <p class="address"><i class="fas fa-map-marker-alt"></i> Av. Paulista, 1000 - Bela Vista, São Paulo - SP</p>
+                <div class="carousel" style="border-radius: 10px; margin-bottom: 20px;">
+                    <img src="https://convidatasshop.wordpress.com/wp-content/uploads/2026/01/img_4722.jpg?w=768" class="carousel-slide active" alt="Espaço 1">
+                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2053&auto=format&fit=crop" class="carousel-slide" alt="Espaço 2">
+                    <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Av.+Paulista,+1000+-+Bela+Vista,+São+Paulo+-+SP" target="_blank" class="btn">Abrir no Google Maps</a>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1975870295!2d-46.6521943!3d-23.5646162!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1650000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="section contact-section">
+        <h2 class="section-title">Agende Sua Avaliação</h2>
+        <div class="contact-container">
+            <div class="contact-image">
+                <img src="https://convidatasshop.wordpress.com/wp-content/uploads/2026/01/img_4721.jpg?w=768" alt="Agendamento">
+            </div>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" required placeholder="Digite seu nome">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required placeholder="Digite seu e-mail">
+                </div>
+                <button type="submit" class="btn" style="width: 100%">Entrar em Contato</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">
+            <img src="https://convidatasshop.wordpress.com/wp-content/uploads/2026/01/novo-projeto-5.png?w=1024" alt="Ricardo Ramos Logo" style="height: 60px; filter: brightness(0) invert(1);">
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="https://wa.me/5563999610812"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p class="copyright">© 2024 Ricardo Ramos Estética Avançada. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/5563999610812" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle?.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Carousel
+        class Carousel {
+            constructor(element) {
+                this.element = element;
+                this.slides = element.querySelectorAll('.carousel-slide');
+                this.prevBtn = element.querySelector('.prev');
+                this.nextBtn = element.querySelector('.next');
+                this.currentIndex = 0;
+                
+                if (this.slides.length > 0) {
+                    this.slides[0].classList.add('active');
+                    if (this.prevBtn && this.nextBtn) {
+                        this.prevBtn.addEventListener('click', () => this.prev());
+                        this.nextBtn.addEventListener('click', () => this.next());
+                    }
+                    setInterval(() => this.next(), 5000);
+                }
+            }
+
+            show(index) {
+                this.slides.forEach(s => s.classList.remove('active'));
+                this.slides[index].classList.add('active');
+            }
+
+            next() {
+                this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+                this.show(this.currentIndex);
+            }
+
+            prev() {
+                this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+                this.show(this.currentIndex);
+            }
+        }
+
+        document.querySelectorAll('.carousel').forEach(el => new Carousel(el));
+
+        // Accordion
+        document.querySelectorAll('.accordion-item').forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            header.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                document.querySelectorAll('.accordion-item').forEach(i => {
+                    i.classList.remove('active');
+                    i.querySelector('.accordion-body').style.maxHeight = null;
+                });
+
+                if (!isActive) {
+                    item.classList.add('active');
+                    const body = item.querySelector('.accordion-body');
+                    body.style.maxHeight = body.scrollHeight + "px";
+                }
+            });
+        });
+
+        // Contact Form → WhatsApp
+        document.getElementById('contactForm')?.addEventListener('submit', e => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            
+            if (!name || !email.includes('@')) {
+                alert('Por favor, preencha nome e um e-mail válido!');
+                return;
+            }
+
+            const message = `Olá! Meu nome é *${name}* (${email}). Gostaria de agendar uma avaliação na clínica.`;
+            window.open(`https://wa.me/5563999610812?text=${encodeURIComponent(message)}`, '_blank');
+        });
+    </script>
+</body>
+</html>
